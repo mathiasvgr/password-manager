@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          npm install
+      - name: Build app
+        run: |
+          npm run build -- --debug > cargo.log
+        continue-on-error: false
