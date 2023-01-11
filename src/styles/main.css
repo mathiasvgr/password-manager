@@ -1,33 +1,15 @@
+@import "./reset.css";
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-* {
-  margin: 0;
-}
-html, body {
-  height: 100%;
-}
+  --primary-color : rgb(35, 33, 33);
+  --secondary-color : rgb(243, 245, 248);
+  --light-color : rgb(255, 255, 255);
+  --border-color : rgba(var(--primary-color), 0.5);
 
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-}
-input, button, textarea, select {
-  font: inherit;
-}
-
-#root, #__next {
-  isolation: isolate;
 }
