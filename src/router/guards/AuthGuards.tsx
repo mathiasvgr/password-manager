@@ -1,7 +1,7 @@
 import { ApiResponse } from "@api/ApiResponse";
 import { UserApi } from "@api/UserApi";
 import { UserModel } from "@api/models/UserModel";
-import { Navigate, Outlet, useLoaderData, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLoaderData } from "react-router-dom";
 
 const AuthGuardsPropsLoader = async () => {
     let user : UserModel | null = null;
