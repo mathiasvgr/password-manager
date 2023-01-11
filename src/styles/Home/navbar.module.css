@@ -1,0 +1,49 @@
+.navbar {
+    --size-logo : 40px;
+
+}
+
+.wrapper {
+    background-color: aqua;
+    min-width: var(--size-logo);
+    max-width: var(--size-logo);
+    overflow: hidden;
+    box-sizing: content-box;
+    padding : 1rem;
+    height: 100%;
+}
+
+.actions_container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+    border: solid 1px red; 
+}
+
+.links_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.text {
+    visibility: hidden;
+}
+
+.searchbar_container {
+    height: 100px;
+    border: 1px solid red; 
+}
+
+.icon {
+    max-width: var(--size-logo);
+    height: auto;
+}
