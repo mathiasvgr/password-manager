@@ -1,19 +1,19 @@
 .navbar {
     --size-logo : 40px;
-
+    --padding-navbar :1rem;
 }
 
 .wrapper {
     background-color: aqua;
-    min-width: var(--size-logo);
-    max-width: var(--size-logo);
+    min-width: calc(var(--size-logo) + var(--padding-navbar) * 2);
+    max-width: calc(var(--size-logo) + var(--padding-navbar) * 2);
     overflow: hidden;
-    box-sizing: content-box;
-    padding : 1rem;
     height: 100%;
 }
 
 .actions_container {
+    margin : 1rem;
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@
 .links_container {
     display: flex;
     flex-direction: column;
-    gap: 10%;
+    gap: 1rem;
 }
 
 .action {
@@ -39,11 +39,29 @@
 }
 
 .searchbar_container {
-    height: 100px;
     border: 1px solid red; 
+    padding: 1rem 0;
+
+    display: flex;
+    justify-content: center;
+}
+
+.search_bar {
+    display: none;
+}
+
+.burger_menu {
+    height: 100%;
+    cursor: pointer;
+}
+
+.search_icon {
+
 }
 
 .icon {
+    min-width: var(--size-logo);
     max-width: var(--size-logo);
     height: auto;
 }
+
