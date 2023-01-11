@@ -58,7 +58,13 @@ const Links : FC<{}> = () => {
 const SearchBar : FC<{}> = () => {
     return (
         <div className={styles.searchbar_container}>
-            
+            <button className={styles.burger_menu}>
+                <Icon styles={styles.icon} name="burger.svg" alt="burger menu" />
+            </button>
+            <div className={styles.search_bar}>
+                <Icon styles={styles.search_icon} name="search.svg" alt="search" />
+                <input type="text" placeholder="Search" />
+            </div>
         </div>
     )
 }

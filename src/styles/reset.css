@@ -34,10 +34,15 @@ button {
             box-sizing: content-box;
 }
 
+button {
+  cursor: pointer;
+}
+
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
 button {
+
     background: none;
     border: 0;
     color: inherit;
