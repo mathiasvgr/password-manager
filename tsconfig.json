@@ -21,8 +21,7 @@
     "paths": {
       "@api/*": ["api/*"],
       "@components/*": ["components/*"],
-      "@pages/*": ["components/pages/*"],
-      
+      "@pages/*": ["pages/*"],
       "@router/*": ["router/*"],
       "@hooks/*": ["hooks/*"],
       "@styles/*": ["styles/*"],
