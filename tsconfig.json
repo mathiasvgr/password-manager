@@ -25,6 +25,7 @@
       "@router/*": ["router/*"],
       "@hooks/*": ["hooks/*"],
       "@styles/*": ["styles/*"],
+      "@public/*": ["../public/*"],
     }
 
   },
