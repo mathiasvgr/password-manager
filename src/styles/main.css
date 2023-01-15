@@ -16,6 +16,6 @@
 
 body {
     background-color: var(--secondary-color) !important;
-    font-family: var(--primary-font);
+    font-family: 'Frutiger' !important;
     color : var(--primary-color);
 }

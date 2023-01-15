@@ -22,15 +22,27 @@ const NavbarLinks : React.FC<NavbarLinksProps> = ({to, iconName, text, alt, isMe
         }
     )
 
+    const styleListItem = (theme: Theme): CSSObject => {
+        return (
+            {
+                // use font family of theme
+                opacity: isMenuOpen ? 1 : 0,
+                fontFamily: theme.typography.fontFamily,
+            }
+        )
+    }
+
     return (
         <Link to={to}>
-            <ListItem  key={text} disablePadding>
+            <ListItem   key={text} disablePadding>
                 <ListItemButton  sx={{ padding: '0' }}>
                     <ListItemIcon sx={styleListItemIcon}>
                         <Icon name={iconName} alt={alt} />
                     </ListItemIcon>
 
-                    <ListItemText primary={text} sx={{ opacity: isMenuOpen ? 1 : 0 }} />
+                    <ListItemText 
+                        primary={text} 
+                        sx={styleListItem} />
                 </ListItemButton>
             </ListItem>
         </Link>
