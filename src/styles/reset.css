@@ -34,10 +34,6 @@ button {
             box-sizing: content-box;
 }
 
-button {
-  cursor: pointer;
-}
-
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
@@ -66,6 +62,8 @@ button::-moz-focus-inner {
 
 /* Make `a` like a button */
 [role="button"] {
+  all : unset;
+
     color: inherit;
     cursor: default;
     display: inline-block;
@@ -78,4 +76,7 @@ button::-moz-focus-inner {
         -ms-user-select: none;
 }
 
-
+a, button  {
+  all : unset;
+  cursor: pointer;
+}
