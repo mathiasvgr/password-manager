@@ -6,16 +6,4 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
-  --primary-color : rgb(35, 33, 33);
-  --secondary-color : rgb(243, 245, 248);
-  --light-color : rgb(255, 255, 255);
-  --border-color : rgba(var(--primary-color), 0.5);
-  --primary-font: "Roboto", sans-serif;
-}
-
-body {
-    background-color: var(--secondary-color) !important;
-    font-family: var(--primary-font);
-    color : var(--primary-color);
 }
