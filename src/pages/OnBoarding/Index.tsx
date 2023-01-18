@@ -18,7 +18,6 @@ const OnBoardingPropsLoader = async () => {
 function OnBoarding() {
   const { isThereUserInDB } : any = useLoaderData();
 
-  console.log("YEAHHH")
   if (isThereUserInDB == true) {
     return <Navigate to="/login" state={{ from: location }} />;
   }

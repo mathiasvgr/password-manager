@@ -21,14 +21,14 @@
     "paths": {
       "@api/*": ["api/*"],
       "@components/*": ["components/*"],
-      "@pages/*": ["components/pages/*"],
-      
+      "@pages/*": ["pages/*"],
       "@router/*": ["router/*"],
       "@hooks/*": ["hooks/*"],
       "@styles/*": ["styles/*"],
+      "@public/*": ["../public/*"],
     }
 
   },
-  "include": ["src"],
+  "include": ["src", "global.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
