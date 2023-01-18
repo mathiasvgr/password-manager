@@ -14,23 +14,24 @@ const DrawerHeader : FC<NavbarHeaderProps> = ({open, toggleDrawer}) => {
 
   const drawerHeaderStyle = (theme: Theme): CSSObject => (
     {
-      display : 'flex',
+      display: 'flex',
       alignItems: 'center',
+      minWidth: "max-content",
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      height: '10%',
+      height: NAVBAR_ICON_SIZE * 2,
       ...ITEM_MARGIN(theme)
     }
   );
 
   return (
     <Box sx={drawerHeaderStyle}>
-      <button style={{width : `${NAVBAR_ICON_SIZE}px`}}  onClick={toggleDrawer}>
+      <button style={{ width : `${NAVBAR_ICON_SIZE}px` }}  onClick={toggleDrawer}>
         <Icon name="burger.svg" alt="burger menu" />
       </button>
-      <SearchBar/>
+      <SearchBar isMenuOpen={open} />
     </Box>
     )
 
