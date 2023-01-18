@@ -1,21 +1,27 @@
 import { Theme, CSSObject } from '@mui/material/styles';
 
-const SPACING = 8;
+const CLOSED_NAVBAR_SPACING = 8;
 
-const NAVBAR_ICON_SIZE = 35;
+const TEXT_SPACING = 2;
+
+const LINK_SPACING = 1.5;
+
+const NAVBAR_ICON_SIZE = 30;
 
 const NAVBAR_WIDTH = 240;
 
 const ITEM_MARGIN = (theme: Theme): CSSObject => (
   {
-    ml: `calc(${theme.spacing(SPACING / 2)})`,
+    ml: `calc(${theme.spacing(CLOSED_NAVBAR_SPACING / 2)})`,
   }
 )
 
 export 
 {
-  SPACING,
+  CLOSED_NAVBAR_SPACING,
   NAVBAR_ICON_SIZE,
   NAVBAR_WIDTH,
-  ITEM_MARGIN
+  ITEM_MARGIN,
+  TEXT_SPACING,
+  LINK_SPACING,
 }

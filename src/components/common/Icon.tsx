@@ -13,5 +13,6 @@ const Icon : FC<IconProps> = ({name, alt, option}) => {
 }
 
 export {
-    Icon
+    Icon,
+    type IconProps
 }

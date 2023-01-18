@@ -56,6 +56,7 @@ class UserApi {
     }
     
     public static logout() : Promise<ApiResponse<null>> {
+        this.fetchedUser = false;
         return fakeApiCall<null>(null)
     }
 
