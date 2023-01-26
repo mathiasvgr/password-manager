@@ -5,7 +5,6 @@ import Box from "@mui/material/Box/Box";
 
 function Home() {
 
-
   const homeStyle = {
     display: "flex",
     width: "100%",
