@@ -2,7 +2,7 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import { PMTableRow, RowInfo, transformIntoRowInfo } from './PMTableRow';
-import { EncryptedLogins } from '@api/models/Logins';
+import { EncryptedLogins } from '@api/models/LoginsModel';
 import { FC, useState } from 'react';
 import { PMTableHead } from './PMTableHead';
 
@@ -45,33 +45,7 @@ interface PMTableProps {
   rows: EncryptedLogins[];
 }
 
-// # CREATION OF TABLE 
 const PMTable : FC<PMTableProps> = ({ rows }) => {
-
-  // create fake data of type ENCRYPTED LOGINS 
-  rows = [
-    {
-      id: 1,
-      name: 'Cupcake',
-      emails : 'wqeqwffas@amzeza',
-      website: 'dasdsatgt',
-      timestamp: 1675336820,
-    },
-    {
-      id : 2, 
-      name: 'Donut',
-      emails : 'hfgdhfgasdas@amzeza',
-      website: 'gfdg',
-      timestamp: 1675419620,
-    },
-    {
-      id : 3,
-      name: 'Eclair',
-      emails : 'rewqut6y@amzeza',
-      website: 'toutyurtto',
-      timestamp: 1677752420,
-    },
-  ]
 
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof EncryptedLogins>("emails");

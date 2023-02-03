@@ -7,7 +7,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { visuallyHidden } from '@mui/utils';
 import { Order } from './PMTable';
 import { FC } from 'react';
-import { EncryptedLogins } from '@api/models/Logins';
+import { EncryptedLogins } from '@api/models/LoginsModel';
 
 interface HeadCell {
     disablePadding: boolean;
@@ -79,7 +79,6 @@ const PMTableHead : FC<PMTableHeadProps> = (props: PMTableHeadProps) => {
             }}
           />
         </TableCell>
-
 
         {HEAD_DESCRIPTION.map((headCell) => (
 

@@ -1,4 +1,4 @@
-import { EncryptedLogins } from "@api/models/Logins";
+import { EncryptedLogins } from "@api/models/LoginsModel";
 import { TableRow, TableCell, Checkbox } from "@mui/material"
 import { FC } from "react";
 

@@ -13,11 +13,11 @@ const AuthGuardsPropsLoader = async () => {
         user = null;
     }
 
-    return { user };
+    return user;
 }
 
 const AuthGuards = () => {
-    const { user } :  any = useLoaderData();   
+    const user :  any = useLoaderData();   
 
     if (!user) {
         return <Navigate to="/login" />;

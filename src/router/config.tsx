@@ -1,5 +1,5 @@
 import { Home } from "@pages/Home/Index"
-import { Passwords } from "@pages/Home/Passwords/Index";
+import { Passwords, PasswordsLoader } from "@pages/Home/Passwords/Index";
 import { Payments } from "@pages/Home/Payments/Index";
 import { Personal } from "@pages/Home/Personal/Index";
 import { Servers } from "@pages/Home/Servers/Index";
@@ -25,13 +25,13 @@ const router = createBrowserRouter([
     loader: AuthGuardsPropsLoader,
     children: [
       {
-
         path: "/home",
         element: <Home/>,
         children: [
           {
             path: "passwords",
-            element: <Passwords/>
+            element: <Passwords/>,
+            loader : PasswordsLoader,
           },  
           {
             path: "payments",
