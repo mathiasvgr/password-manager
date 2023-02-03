@@ -1,46 +1,43 @@
 import { EncryptedLogins } from "@api/models/Logins";
-import { TableRow, TableCell, Checkbox, Theme } from "@mui/material"
+import { TableRow, TableCell, Checkbox } from "@mui/material"
 import { FC } from "react";
 
-export class RowInfo<T>  {
-    data : T; 
-    isSelected : boolean;
-  
-    constructor(data: T) {
-      this.isSelected = false;
-      this.data = data;
-    }
+
+function transformIntoRowInfo(logins : EncryptedLogins[]) : RowInfo[] {
+    return logins.map((login : EncryptedLogins) => {
+        return {
+            ...login,
+            isSelected : false,
+        }
+    })
 }
-  
-export function transformIntoRowInfo<T>(data: T[]) : RowInfo<T>[] {
-    let rows : RowInfo<T>[] = [];
 
-    if (!data)
-        return rows;
+function transformTimestampToReadableDate(timestamp : number) : string {
+    console.log(timestamp);
+    return new Date(timestamp).toLocaleDateString();
 
-    data.forEach((element) => {
-        rows.push(new RowInfo(element));
-    });
+}
 
-    return rows;
+interface RowInfo extends EncryptedLogins {
+    isSelected : boolean;
 }
   
 interface PMTableRowProps {
-    onRowClick : (row: RowInfo<EncryptedLogins>) => void;
-    row : RowInfo<EncryptedLogins>,
+    onRowClick : (row: RowInfo) => void;
+    row : RowInfo,
     key : number,
 }
 
 const PMTableRow : FC<PMTableRowProps> = ({ onRowClick, row, key}) => {
-    const {name, emails, website, timestamp, logo} = row.data;
+    const {name, emails, website, timestamp, logo, isSelected} = row;
 
     return (
-        <TableRow hover role="checkbox" key={key} selected={row.isSelected}>
+        <TableRow hover role="checkbox" key={key} selected={isSelected}>
             <TableCell padding="checkbox">
                 <Checkbox
                     onClick={(_ : any) => onRowClick(row)}
                     color="primary"
-                    checked={row.isSelected}
+                    checked={isSelected}
                 />
             </TableCell>
             
@@ -49,11 +46,13 @@ const PMTableRow : FC<PMTableRowProps> = ({ onRowClick, row, key}) => {
             </TableCell>
             <TableCell align="left">{emails}</TableCell>
             <TableCell align="left">{website}</TableCell>
-            <TableCell align="left">{timestamp}</TableCell>
+            <TableCell align="right">{transformTimestampToReadableDate(timestamp)}</TableCell>
           </TableRow>
     )
 }
 
 export {
-    PMTableRow
+    PMTableRow,
+    type RowInfo,
+    transformIntoRowInfo
 }

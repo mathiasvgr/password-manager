@@ -7,60 +7,52 @@ import Checkbox from '@mui/material/Checkbox';
 import { visuallyHidden } from '@mui/utils';
 import { Order } from './PMTable';
 import { FC } from 'react';
-
-interface Data {
-    calories: number;
-    carbs: number;
-    fat: number;
-    name: string;
-    protein: number;
-}
+import { EncryptedLogins } from '@api/models/Logins';
 
 interface HeadCell {
     disablePadding: boolean;
-    id: keyof Data;
+    id: keyof EncryptedLogins;
     label: string;
     numeric: boolean;
+    isVisible: boolean;
 }
   
-const headCells: readonly HeadCell[] = [
+const HEAD_DESCRIPTION: readonly HeadCell[] = [
     {
       id: 'name',
       numeric: false,
       disablePadding: true,
-      label: 'Dessert (100g serving)',
+      label: 'Name',
+      isVisible: true,
     },
     {
-      id: 'calories',
-      numeric: true,
+      id: 'emails',
+      numeric: false,
       disablePadding: false,
-      label: 'Calories',
+      label: 'Emails',
+      isVisible: true,
     },
     {
-      id: 'fat',
-      numeric: true,
+      id: 'website',
+      numeric: false,
       disablePadding: false,
-      label: 'Fat (g)',
+      label: 'Website',
+      isVisible: true,
     },
     {
-      id: 'carbs',
+      id: 'timestamp',
       numeric: true,
       disablePadding: false,
-      label: 'Carbs (g)',
-    },
-    {
-      id: 'protein',
-      numeric: true,
-      disablePadding: false,
-      label: 'Protein (g)',
-    },
+      label: 'Last modification',
+      isVisible: true,
+    }
 ];
 
 
 interface PMTableHeadProps {
   numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
-  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onRequestSort: (property: keyof EncryptedLogins | any ) => void;
+  onSelectAllClick: () => void;
   order: Order;
   orderBy: string;
   rowCount: number;
@@ -69,9 +61,8 @@ interface PMTableHeadProps {
 const PMTableHead : FC<PMTableHeadProps> = (props: PMTableHeadProps) => {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
   
-  const createSortHandler =
-    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
-      onRequestSort(event, property);
+  const createSortHandler = (property: keyof EncryptedLogins) => (_ : React.MouseEvent<unknown>) => {
+      onRequestSort(property);
     };
 
   return (
@@ -88,27 +79,37 @@ const PMTableHead : FC<PMTableHeadProps> = (props: PMTableHeadProps) => {
             }}
           />
         </TableCell>
-        {headCells.map((headCell) => (
+
+
+        {HEAD_DESCRIPTION.map((headCell) => (
+
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
+            {headCell.isVisible && 
+              (
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : 'asc'}
+                  onClick={createSortHandler(headCell.id)}
+                >
+                  {headCell.label}
+
+                  {orderBy === headCell.id ? (
+                    <Box component="span" sx={visuallyHidden}>
+                      {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                    </Box>
+                  ) : null}
+                </TableSortLabel>
+              )
+            }
+
           </TableCell>
         ))}
+
       </TableRow>
     </TableHead>
   );

@@ -4,6 +4,7 @@ import TableContainer from '@mui/material/TableContainer';
 import { PMTableRow, RowInfo, transformIntoRowInfo } from './PMTableRow';
 import { EncryptedLogins } from '@api/models/Logins';
 import { FC, useState } from 'react';
+import { PMTableHead } from './PMTableHead';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -17,13 +18,9 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
 
 export type Order = 'asc' | 'desc';
 
-function getComparator<Key extends keyof any>(
-  order: Order,
-  orderBy: Key,
-): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string },
-) => number {
+type CompareFunction<Key extends keyof any> = (a: { [key in Key]?: number | string }, b: { [key in Key]?: number | string }) => number;
+
+function getComparator<Key extends keyof any>(order: Order, orderBy: Key): CompareFunction<Key> {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
@@ -54,61 +51,81 @@ const PMTable : FC<PMTableProps> = ({ rows }) => {
   // create fake data of type ENCRYPTED LOGINS 
   rows = [
     {
+      id: 1,
       name: 'Cupcake',
-      emails : 'toto@amzeza',
-      website: 'toto',
-      timestamp: 'toto',
+      emails : 'wqeqwffas@amzeza',
+      website: 'dasdsatgt',
+      timestamp: 1675336820,
     },
     {
+      id : 2, 
       name: 'Donut',
-      emails : 'toto@amzeza',
-      website: 'toto',
-      timestamp: 'toto',
+      emails : 'hfgdhfgasdas@amzeza',
+      website: 'gfdg',
+      timestamp: 1675419620,
     },
     {
+      id : 3,
       name: 'Eclair',
-      emails : 'toto@amzeza',
-      website: 'toto',
-      timestamp: 'toto',
+      emails : 'rewqut6y@amzeza',
+      website: 'toutyurtto',
+      timestamp: 1677752420,
     },
   ]
 
-
   const [order, setOrder] = useState<Order>('asc');
-  const [orderBy, setOrderBy] = useState<keyof EncryptedLogins>('name');
+  const [orderBy, setOrderBy] = useState<keyof EncryptedLogins>("emails");
   
   const [encryptedLogins, setEncryptedLogins] = 
-    useState<RowInfo<EncryptedLogins>[]>(transformIntoRowInfo<EncryptedLogins>(rows));
+    useState<RowInfo[]>(transformIntoRowInfo(rows));
 
-  const handleRequestSort = (_:any, property: keyof EncryptedLogins) => {
+  const handleRequestSort = (property: keyof EncryptedLogins) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
 
-  const onRowClick = (row: RowInfo<EncryptedLogins>) => {
+  const onRowClick = (row: RowInfo) => {
     row.isSelected = !row.isSelected;
     setEncryptedLogins([...encryptedLogins]);
   };
+
+  const onSelectAll = () => {
+    if (isAtLeastOneSelected(encryptedLogins)) {
+      encryptedLogins.forEach((row) => (row.isSelected = false));
+    } else {
+      encryptedLogins.forEach((row) => (row.isSelected = true));
+    }
+    setEncryptedLogins([...encryptedLogins]);
+  } 
+
+  const isAtLeastOneSelected = (rows : RowInfo[]) => {
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].isSelected) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   return (
         <TableContainer>
           <Table sx={{ minWidth: 750 }} >
 
-            {/* <PMTableHead
-              numSelected={selected.length}
+            <PMTableHead
+              numSelected={encryptedLogins.reduce((total, row) => total + (row.isSelected ? 1 : 0), 0)}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
+              onSelectAllClick={onSelectAll}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
-            /> */}
+            />
 
             <TableBody>
               {
-                // stableSort(rows, getComparator(order, orderBy))
-                encryptedLogins.map((row, index) => {
+                stableSort<RowInfo>(encryptedLogins, getComparator<keyof EncryptedLogins>(order, orderBy))
+                .map((row, index) => {
 
                   return (
                     <PMTableRow

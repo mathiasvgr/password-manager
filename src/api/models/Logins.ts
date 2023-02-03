@@ -1,21 +1,15 @@
 
 interface EncryptedLogins {
+    id : number,  
     name : string,
     emails : string,
     website : string,
-    timestamp : string,
+    timestamp : number,
     logo ?: string,
-
 }
 
-interface DecryptedLogins {
-    name : string,
-    emails : string,
-    website : string,
-    timestamp : string,
+interface DecryptedLogins extends EncryptedLogins {
     password : string,
-    
-    logo ?: string,
     categories ?: string,
     username ?: string,
     Oauth ?: string,
