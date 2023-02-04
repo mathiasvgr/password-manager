@@ -1,5 +1,5 @@
 import { EncryptedLogins } from "@api/models/LoginsModel";
-import { TableRow, TableCell, Checkbox, Avatar, Theme, CSSObject } from "@mui/material"
+import { TableRow, TableCell, Checkbox, Avatar, Theme, CSSObject, Box } from "@mui/material"
 import { FC } from "react";
 import { RowLogo } from "./RowLogo";
 
@@ -29,8 +29,6 @@ interface PMTableRowProps {
 
 const PMTableRow : FC<PMTableRowProps> = ({ onRowClick, row, key}) => {
     const {name, emails, website, timestamp, logo, isSelected} = row;
-
-
     
     const styles = (theme: Theme): CSSObject => (
         {
@@ -43,7 +41,9 @@ const PMTableRow : FC<PMTableRowProps> = ({ onRowClick, row, key}) => {
 
     return (
         <TableRow hover role="checkbox" key={key} selected={isSelected}>
-            <TableCell padding="checkbox">
+            <TableCell
+            sx={{   width: "1px", whiteSpace: "nowrap"}}
+            padding="checkbox">
                 <Checkbox
                     onClick={(_ : any) => onRowClick(row)}
                     color="primary"
@@ -54,10 +54,10 @@ const PMTableRow : FC<PMTableRowProps> = ({ onRowClick, row, key}) => {
             
             <TableCell sx={styles} component="th" scope="row" padding="none">
                 <RowLogo logo={logo} name={name} />
-                {name}
+                <Box sx={{whiteSpace: "nowrap"}}>{name}</Box>
             </TableCell>
-            <TableCell align="left">{website}</TableCell>
             <TableCell align="left">{emails}</TableCell>
+            <TableCell align="left">{website}</TableCell>
             <TableCell align="right">{transformTimestampToReadableDate(timestamp)}</TableCell>
           </TableRow>
     )

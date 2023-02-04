@@ -85,7 +85,7 @@ const PMTable : FC<PMTableProps> = ({ rows }) => {
 
   return (
         <TableContainer>
-          <Table sx={{ minWidth: 750 }} >
+          <Table stickyHeader sx={{ minWidth: 950 }} >
 
             <PMTableHead
               numSelected={encryptedLogins.reduce((total, row) => total + (row.isSelected ? 1 : 0), 0)}

@@ -13,8 +13,10 @@ const RowLogo : FC<RowLogoProps> = ({logo, name}) => {
 
     const containerStyle = {
         position : "relative",
+        minWidth : "60px",
         width : "60px",
         height : "40px",
+        minHeight : "40px",
         backgroundColor : (theme : Theme) => theme.palette.primary.main,
         color : (theme : Theme) => theme.palette.light.main,
         display : "flex",
