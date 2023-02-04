@@ -21,15 +21,8 @@ const HEAD_DESCRIPTION: readonly HeadCell[] = [
     {
       id: 'name',
       numeric: false,
-      disablePadding: true,
-      label: 'Name',
-      isVisible: true,
-    },
-    {
-      id: 'emails',
-      numeric: false,
       disablePadding: false,
-      label: 'Emails',
+      label: 'Name',
       isVisible: true,
     },
     {
@@ -37,6 +30,13 @@ const HEAD_DESCRIPTION: readonly HeadCell[] = [
       numeric: false,
       disablePadding: false,
       label: 'Website',
+      isVisible: true,
+    },
+    {
+      id: 'emails',
+      numeric: false,
+      disablePadding: false,
+      label: 'Emails',
       isVisible: true,
     },
     {
@@ -72,6 +72,7 @@ const PMTableHead : FC<PMTableHeadProps> = (props: PMTableHeadProps) => {
           <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
+            
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{
@@ -79,6 +80,7 @@ const PMTableHead : FC<PMTableHeadProps> = (props: PMTableHeadProps) => {
             }}
           />
         </TableCell>
+        <TableCell />
 
         {HEAD_DESCRIPTION.map((headCell) => (
 
@@ -88,6 +90,7 @@ const PMTableHead : FC<PMTableHeadProps> = (props: PMTableHeadProps) => {
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
+
             {headCell.isVisible && 
               (
                 <TableSortLabel

@@ -17,14 +17,15 @@ function fakeApiCall<T>(data : T | null, fail : boolean = false, message : strin
 // Fake call while waiting for rust data
 class LoginsApi {
 
-    private static mockData: EncryptedLogins[] = [
+    private static mockData: EncryptedLogins[] =
+    [
         {
             id: 1,
             name: 'John Doe',
             emails: 'john.doe@example.com',
             website: 'www.johndoe.com',
             timestamp: 1612348723,
-            logo: 'https://www.johndoe.com/logo.png'
+            logo: 'https://picsum.photos/200'
         },
         {
             id: 2,
@@ -39,7 +40,7 @@ class LoginsApi {
             emails: 'bob.smith@example.com',
             website: 'www.bobsmith.com',
             timestamp: 1612348798,
-            logo: 'https://www.bobsmith.com/logo.png'
+            logo: 'https://picsum.photos/200'
         },
         {
             id: 4,
@@ -54,7 +55,7 @@ class LoginsApi {
             emails: 'charlie.brown@example.com',
             website: 'www.charliebrown.com',
             timestamp: 1612348872,
-            logo: 'https://www.charliebrown.com/logo.png'
+            logo: 'https://picsum.photos/200'
         },
         {
             id: 6,
@@ -69,7 +70,7 @@ class LoginsApi {
             emails: 'frank.wilson@example.com',
             website: 'www.frankwilson.com',
             timestamp: 1612348946,
-            logo: 'https://www.frankwilson.com/logo.png'
+            logo: 'https://picsum.photos/200'
         },
         {
             id: 8,
@@ -84,7 +85,7 @@ class LoginsApi {
             emails: 'henry.davis@example.com',
             website: 'www.henrydavis.com',
             timestamp: 1612349020,
-            logo: 'https://www.henrydavis.com/logo.png'
+            logo: 'https://picsum.photos/200'
         },
         {
             id: 10,
@@ -112,8 +113,7 @@ class LoginsApi {
             emails: data.emails,
             website: data.website,
             timestamp: data.timestamp,
-            logo: data.logo,
-            password: "password",
+            logo: 'https://picsum.photos/200',
             categories: "categories",
             username: "username"
         } as DecryptedLogins);

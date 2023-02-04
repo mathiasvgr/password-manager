@@ -1,13 +1,13 @@
-import { PaletteColorOptions, } from '@mui/material';
+import { PaletteColor } from '@mui/material';
 
 declare module "@mui/material/styles" {
     interface Palette {
-      border: PaletteColorOptions;
-      light: PaletteColorOptions;
+      border: PaletteColor;
+      light: PaletteColor;
     }
     interface PaletteOptions {
-      border: PaletteColorOptions;
-      light: PaletteColorOptions;
+      border: PaletteColor;
+      light: PaletteColor;
     }
   }
   
