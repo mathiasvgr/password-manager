@@ -1,5 +1,7 @@
 import { ApiError, ApiResponse } from "./ApiResponse";
-import { DecryptedLogins, EncryptedLogins } from "./models/LoginsModel";
+import { DecryptedLogin, EncryptedLogin } from "./models/LoginsModel";
+
+type EncryptedLoginCreate = Omit<EncryptedLogin, 'id'>;
 
 function fakeApiCall<T>(data : T | null, fail : boolean = false, message : string = "OK") : Promise<ApiResponse<T>> {
     return new Promise<ApiResponse<T>>((resolve, reject) => {
@@ -17,7 +19,7 @@ function fakeApiCall<T>(data : T | null, fail : boolean = false, message : strin
 // Fake call while waiting for rust data
 class LoginsApi {
 
-    private static mockData: EncryptedLogins[] =
+    private static mockData: EncryptedLogin[] =
     [
         {
             id: 1,
@@ -96,12 +98,12 @@ class LoginsApi {
         },
     ];
 
-    static getEncryptedLogins() : Promise<ApiResponse<EncryptedLogins[]>> {
+    static getEncryptedLogin() : Promise<ApiResponse<EncryptedLogin[]>> {
         return fakeApiCall(LoginsApi.mockData);
     }
 
-    static decryptLogin(id: number) : Promise<ApiResponse<DecryptedLogins | null>> {
-        let data : EncryptedLogins | undefined = LoginsApi.mockData.find((login) => login.id == id);
+    static decryptLogin(id: number) : Promise<ApiResponse<DecryptedLogin | null>> {
+        let data : EncryptedLogin | undefined = LoginsApi.mockData.find((login) => login.id == id);
         
         if (data == undefined) {
             return fakeApiCall(null, true, "Login not found");
@@ -116,24 +118,37 @@ class LoginsApi {
             logo: 'https://picsum.photos/200',
             categories: "categories",
             username: "username"
-        } as DecryptedLogins);
+        } as DecryptedLogin);
     }
 
-    static createLogin(login : EncryptedLogins) : Promise<ApiResponse<EncryptedLogins>> {
+    static addLogin(login : EncryptedLoginCreate) : Promise<ApiResponse<EncryptedLogin>> {
+        const data : EncryptedLogin = {
+            id: LoginsApi.mockData.length + 1,
+            name: login.name,
+            emails: login.emails,
+            website: login.website,
+            timestamp: login.timestamp,
+            logo: 'https://picsum.photos/200'
+        };
+
+        LoginsApi.mockData.push(data);
+
+        return fakeApiCall(data);
+    }
+
+    static updateLogin(login : EncryptedLogin) : Promise<ApiResponse<EncryptedLogin>> {
         return fakeApiCall(login);
     }
 
-    static updateLogin(login : EncryptedLogins) : Promise<ApiResponse<EncryptedLogins>> {
-        return fakeApiCall(login);
-    }
-
-    static deleteLogin(id : number) : Promise<ApiResponse<EncryptedLogins | null>> {
-        const data : EncryptedLogins | undefined = LoginsApi.mockData.find((login) => login.id == id);
+    static deleteLogin(id : number) : Promise<ApiResponse<EncryptedLogin | null>> {
+        const data : EncryptedLogin | undefined = LoginsApi.mockData.find((login) => login.id == id);
 
         if (data == undefined) {
             return fakeApiCall(null, true, "Login not found");
         }
 
+        LoginsApi.mockData = LoginsApi.mockData.filter((login) => login.id != id);
+        
         return fakeApiCall(data);
     }
 

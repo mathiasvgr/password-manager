@@ -1,10 +1,11 @@
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
-import { PMTableRow, RowInfo, transformIntoRowInfo } from './PMTableRow';
-import { EncryptedLogins } from '@api/models/LoginsModel';
+import { PMTableRow, RowInfo } from './PMTableRow';
+import { EncryptedLogin } from '@api/models/LoginsModel';
 import { FC, useState } from 'react';
 import { PMTableHead } from './PMTableHead';
+import { useTableData } from '@hooks/useTableData';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -16,7 +17,7 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-export type Order = 'asc' | 'desc';
+type Order = 'asc' | 'desc';
 
 type CompareFunction<Key extends keyof any> = (a: { [key in Key]?: number | string }, b: { [key in Key]?: number | string }) => number;
 
@@ -41,64 +42,56 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
-interface PMTableProps {
-  rows: EncryptedLogins[];
+const AtLeastOneSelected = (rows : RowInfo[]) => {
+  for (let i = 0; i < rows.length; i++) {
+    if (rows[i].isSelected) {
+      return true;
+    }
+  }
+  return false;
 }
 
-const PMTable : FC<PMTableProps> = ({ rows }) => {
-
+const PMTable : FC<{}> = () => {
+  const {rowsData, setRowsData} = useTableData();
   const [order, setOrder] = useState<Order>('asc');
-  const [orderBy, setOrderBy] = useState<keyof EncryptedLogins>("emails");
-  
-  const [encryptedLogins, setEncryptedLogins] = 
-    useState<RowInfo[]>(transformIntoRowInfo(rows));
+  const [orderBy, setOrderBy] = useState<keyof EncryptedLogin>("emails");
 
-  const handleRequestSort = (property: keyof EncryptedLogins) => {
+  const handleRequestSort = (property: keyof EncryptedLogin) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
-
   const onRowClick = (row: RowInfo) => {
     row.isSelected = !row.isSelected;
-    setEncryptedLogins([...encryptedLogins]);
+    setRowsData([...rowsData]);
   };
 
   const onSelectAll = () => {
-    if (isAtLeastOneSelected(encryptedLogins)) {
-      encryptedLogins.forEach((row) => (row.isSelected = false));
+    if (AtLeastOneSelected(rowsData)) {
+      rowsData.forEach((row) => (row.isSelected = false));
     } else {
-      encryptedLogins.forEach((row) => (row.isSelected = true));
+      rowsData.forEach((row) => (row.isSelected = true));
     }
-    setEncryptedLogins([...encryptedLogins]);
+    setRowsData([...rowsData]);
   } 
-
-  const isAtLeastOneSelected = (rows : RowInfo[]) => {
-    for (let i = 0; i < rows.length; i++) {
-      if (rows[i].isSelected) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   return (
         <TableContainer>
-          <Table stickyHeader sx={{ minWidth: 950 }} >
+          <Table sx={{ minWidth: 950 }} >
 
             <PMTableHead
-              numSelected={encryptedLogins.reduce((total, row) => total + (row.isSelected ? 1 : 0), 0)}
+              numSelected={rowsData.reduce((total, row) => total + (row.isSelected ? 1 : 0), 0)}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={onSelectAll}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={rowsData.length}
             />
 
             <TableBody>
               {
-                stableSort<RowInfo>(encryptedLogins, getComparator<keyof EncryptedLogins>(order, orderBy))
+                stableSort<RowInfo>(rowsData, getComparator<keyof EncryptedLogin>(order, orderBy))
                 .map((row, index) => {
 
                   return (
@@ -117,5 +110,7 @@ const PMTable : FC<PMTableProps> = ({ rows }) => {
 
 
 export {
-    PMTable
+    PMTable,
+    type Order,
+    AtLeastOneSelected
 }

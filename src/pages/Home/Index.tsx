@@ -1,5 +1,5 @@
 import { Outlet} from "react-router-dom";
-import { Navbar } from "@components/Navbar/Navbar";
+import { Navbar } from "@components/Home/Navbar/Navbar";
 
 import Box from "@mui/material/Box/Box";
 

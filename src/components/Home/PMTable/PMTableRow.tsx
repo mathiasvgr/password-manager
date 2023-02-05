@@ -1,11 +1,10 @@
-import { EncryptedLogins } from "@api/models/LoginsModel";
+import { EncryptedLogin } from "@api/models/LoginsModel";
 import { TableRow, TableCell, Checkbox, Avatar, Theme, CSSObject, Box } from "@mui/material"
 import { FC } from "react";
 import { RowLogo } from "./RowLogo";
 
-
-function transformIntoRowInfo(logins : EncryptedLogins[]) : RowInfo[] {
-    return logins.map((login : EncryptedLogins) => {
+function transformIntoRowInfo(logins : EncryptedLogin[]) : RowInfo[] {
+    return logins.map((login : EncryptedLogin) => {
         return {
             ...login,
             isSelected : false,
@@ -17,7 +16,7 @@ function transformTimestampToReadableDate(timestamp : number) : string {
     return new Date(timestamp).toLocaleDateString();
 }
 
-interface RowInfo extends EncryptedLogins {
+interface RowInfo extends EncryptedLogin {
     isSelected : boolean;
 }
   

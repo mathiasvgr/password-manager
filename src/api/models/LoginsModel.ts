@@ -1,5 +1,5 @@
 
-interface EncryptedLogins {
+interface EncryptedLogin {
     id : number,  
     name : string,
     emails : string,
@@ -8,7 +8,7 @@ interface EncryptedLogins {
     logo ?: string,
 }
 
-interface DecryptedLogins extends EncryptedLogins {
+interface DecryptedLogin extends EncryptedLogin {
     password : string,
     categories ?: string,
     username ?: string,
@@ -16,6 +16,6 @@ interface DecryptedLogins extends EncryptedLogins {
 }
 
 export {
-    type EncryptedLogins,
-    type DecryptedLogins,
+    type EncryptedLogin,
+    type DecryptedLogin,
 }

@@ -9,8 +9,6 @@ interface RowLogoProps {
 
 const RowLogo : FC<RowLogoProps> = ({logo, name}) => {
 
-    // get the first letter of the 2 first words
-
     const containerStyle = {
         position : "relative",
         minWidth : "60px",
@@ -21,7 +19,7 @@ const RowLogo : FC<RowLogoProps> = ({logo, name}) => {
         color : (theme : Theme) => theme.palette.light.main,
         display : "flex",
         justifyContent : "center",
-        alignItems : "center",
+        alignItems : "center"
     }
 
     const imageStyle : CSS.Properties =  {

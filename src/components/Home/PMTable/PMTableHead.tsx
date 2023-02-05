@@ -7,11 +7,11 @@ import Checkbox from '@mui/material/Checkbox';
 import { visuallyHidden } from '@mui/utils';
 import { Order } from './PMTable';
 import { FC } from 'react';
-import { EncryptedLogins } from '@api/models/LoginsModel';
+import { EncryptedLogin } from '@api/models/LoginsModel';
 
 interface HeadCell {
     disablePadding: boolean;
-    id: keyof EncryptedLogins;
+    id: keyof EncryptedLogin;
     label: string;
     numeric: boolean;
     isVisible: boolean;
@@ -51,7 +51,7 @@ const HEAD_DESCRIPTION: readonly HeadCell[] = [
 
 interface PMTableHeadProps {
   numSelected: number;
-  onRequestSort: (property: keyof EncryptedLogins | any ) => void;
+  onRequestSort: (property: keyof EncryptedLogin | any ) => void;
   onSelectAllClick: () => void;
   order: Order;
   orderBy: string;
@@ -61,7 +61,7 @@ interface PMTableHeadProps {
 const PMTableHead : FC<PMTableHeadProps> = (props: PMTableHeadProps) => {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
   
-  const createSortHandler = (property: keyof EncryptedLogins) => (_ : React.MouseEvent<unknown>) => {
+  const createSortHandler = (property: keyof EncryptedLogin) => (_ : React.MouseEvent<unknown>) => {
       onRequestSort(property);
     };
 
