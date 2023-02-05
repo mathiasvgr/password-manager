@@ -37,7 +37,7 @@ function Navbar() {
         <List sx={listStyle}>
          
           <Box>
-            <Link to={`/home/passwords`}>
+            <Link to={`/home/logins`}>
               <NavbarAction icon={ {name:"lock.svg", alt:"lock"} } text="Logins" isMenuOpen={open} />
             </Link>
             <Link to={`/home/payments`}>

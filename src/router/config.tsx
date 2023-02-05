@@ -1,5 +1,5 @@
 import { Home } from "@pages/Home/Index"
-import { Passwords, PasswordsLoader } from "@pages/Home/Passwords/Index";
+import { Logins, LoginsLoader } from "@pages/Home/Logins/Index";
 import { Payments } from "@pages/Home/Payments/Index";
 import { Personal } from "@pages/Home/Personal/Index";
 import { Servers } from "@pages/Home/Servers/Index";
@@ -29,9 +29,14 @@ const router = createBrowserRouter([
         element: <Home/>,
         children: [
           {
-            path: "passwords",
-            element: <Passwords/>,
-            loader : PasswordsLoader,
+            path: "logins",
+            element: <Logins/>,
+            loader : LoginsLoader,
+            children: [
+              {
+                path: ":id",
+              }
+            ]
           },  
           {
             path: "payments",

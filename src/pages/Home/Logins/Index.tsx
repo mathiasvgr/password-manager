@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { useTableData } from '@hooks/useTableData';
 import { TableDataProvider } from '@hooks/provider/TableDataProvider';
 
-async function PasswordsLoader() {
+async function LoginsLoader() {
   let logins : EncryptedLogin[] | null = null;
 
   try {
@@ -23,12 +23,12 @@ async function PasswordsLoader() {
   return logins;
 }
 
-function Passwords() {
+function Logins() {
 
   const logins : any = useLoaderData();   
 
 
-  const passwordsPageStyle = {
+  const loginsPageStyle = {
     width : "100%",
     height : "100%",
     pl: 3, 
@@ -37,7 +37,7 @@ function Passwords() {
   
   return (
     <TableDataProvider rowsDataInit={transformIntoRowInfo(logins)}>
-      <Box sx={passwordsPageStyle}>
+      <Box sx={loginsPageStyle}>
         <ActionBar />
         <PMTable/>
       </Box>
@@ -47,6 +47,6 @@ function Passwords() {
 
 export 
 {
-  Passwords,
-  PasswordsLoader
+  Logins,
+  LoginsLoader
 }

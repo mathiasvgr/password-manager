@@ -22,13 +22,13 @@ function Login() {
   const { user } : any = useLoaderData();
 
   if (user) {
-    return <Navigate to="/home/passwords" />;
+    return <Navigate to="/home/logins" />;
   }
 
   const connectingUser = () => {
     try {
       login("User");
-      navigate("/home/passwords")
+      navigate("/home/logins")
     } catch (err : any) {
       console.error(err.message);
     }
