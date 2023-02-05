@@ -11,8 +11,8 @@ const DeleteButton : FC<{}> = () => {
         {
             height: "60%",
             fontSize: "0.8rem",
-            color: theme.palette.primary.main, 
-            backgroundColor: theme.palette.light.main 
+            color: theme.palette.light.main, 
+            backgroundColor: theme.palette.danger.main 
         }
     )
 
