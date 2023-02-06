@@ -1,7 +1,7 @@
 import { Outlet} from "react-router-dom";
 import { Navbar } from "@components/Home/Navbar/Navbar";
-
 import Box from "@mui/material/Box/Box";
+import { DrawerProvider } from "@hooks/provider/DrawerProvider";
 
 function Home() {
 
@@ -14,8 +14,10 @@ function Home() {
 
   return (
     <Box style={homeStyle} >
-      <Navbar/>
-      <Outlet />
+      <DrawerProvider>
+        <Navbar/>
+        <Outlet />
+      </DrawerProvider>
     </Box>
     );
 }
