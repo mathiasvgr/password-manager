@@ -5,9 +5,11 @@ import { useTableData } from "@hooks/useTableData";
 import { AtLeastOneSelected } from "@components/Home/PMTable/PMTable";
 import { AddButton } from "./AddButton";
 import { DeleteButton } from "./DeleteButton";
+import { useNavigate } from "react-router-dom";
 
 const ActionBar : FC<{}> = () => {
     const {rowsData} = useTableData();
+    const navigate = useNavigate();
     
     const styleBar = (theme: Theme): CSSObject => (
         {

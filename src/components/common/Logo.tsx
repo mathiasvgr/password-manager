@@ -1,25 +1,29 @@
 import CSS from 'csstype';
-import { Box, Theme } from "@mui/material";
+import { Box, SxProps, Theme } from "@mui/material";
 import { FC } from "react";
 
-interface RowLogoProps {
+interface LogoProps {
     logo ?: string,
     name : string,
+    width : string | ((theme: Theme) => string),
+    height : string | ((theme: Theme) => string),
+    sx?: SxProps<Theme> | undefined
 }
 
-const RowLogo : FC<RowLogoProps> = ({logo, name}) => {
+const Logo : FC<LogoProps> = ({logo, name, width, height, sx}) => {
 
     const containerStyle = {
         position : "relative",
-        minWidth : "60px",
-        width : "60px",
-        height : "40px",
-        minHeight : "40px",
+        minWidth : width,
+        width : width,
+        height : height,
+        minHeight : height,
         backgroundColor : (theme : Theme) => theme.palette.primary.main,
         color : (theme : Theme) => theme.palette.light.main,
         display : "flex",
         justifyContent : "center",
-        alignItems : "center"
+        alignItems : "center",
+        ...sx
     }
 
     const imageStyle : CSS.Properties =  {
@@ -41,5 +45,5 @@ const RowLogo : FC<RowLogoProps> = ({logo, name}) => {
 }
 
 export {
-    RowLogo
+    Logo
 }

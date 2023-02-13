@@ -1,7 +1,6 @@
 import { ApiError, ApiResponse } from "./ApiResponse";
-import { DecryptedLogin, EncryptedLogin } from "./models/LoginsModel";
+import { DecryptedLogin, EncryptedLogin, EncryptedLoginCreate } from "./models/LoginsModel";
 
-type EncryptedLoginCreate = Omit<EncryptedLogin, 'id'>;
 
 function fakeApiCall<T>(data : T | null, fail : boolean = false, message : string = "OK") : Promise<ApiResponse<T>> {
     return new Promise<ApiResponse<T>>((resolve, reject) => {
@@ -115,9 +114,10 @@ class LoginsApi {
             emails: data.emails,
             website: data.website,
             timestamp: data.timestamp,
-            logo: 'https://picsum.photos/200',
+            logo: data.logo,
             categories: "categories",
-            username: "username"
+            username: "username",
+            password: "password",
         } as DecryptedLogin);
     }
 
@@ -127,7 +127,7 @@ class LoginsApi {
             name: login.name,
             emails: login.emails,
             website: login.website,
-            timestamp: login.timestamp,
+            timestamp: 10991231,
             logo: 'https://picsum.photos/200'
         };
 

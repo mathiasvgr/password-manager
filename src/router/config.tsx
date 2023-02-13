@@ -8,6 +8,8 @@ import { OnBoarding, OnBoardingPropsLoader } from "@pages/OnBoarding/Index";
 
 import { createBrowserRouter } from "react-router-dom";
 import { AuthGuards, AuthGuardsPropsLoader } from "./guards/AuthGuards";
+import { IdView, IdViewLoader } from "@pages/Home/Logins/Id/Index";
+import { CreateLogins } from "@pages/Home/Logins/Create/Index";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +36,13 @@ const router = createBrowserRouter([
             loader : LoginsLoader,
             children: [
               {
+                path: "create",
+                element: <CreateLogins/>
+              },
+              {
                 path: ":id",
+                element: <IdView/>,
+                loader : IdViewLoader
               }
             ]
           },  

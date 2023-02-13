@@ -62,7 +62,7 @@ const PMTable : FC<{}> = () => {
     setOrderBy(property);
   };
 
-  const onRowClick = (row: RowInfo) => {
+  const onCheckBoxClick = (row: RowInfo) => {
     row.isSelected = !row.isSelected;
     setRowsData([...rowsData]);
   };
@@ -96,7 +96,7 @@ const PMTable : FC<{}> = () => {
 
                   return (
                     <PMTableRow
-                        onRowClick={onRowClick}
+                        onCheckBoxClick={onCheckBoxClick}
                         row={row}
                         key={index}
                       />

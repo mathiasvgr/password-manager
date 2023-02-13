@@ -1,7 +1,8 @@
 import { EncryptedLogin } from "@api/models/LoginsModel";
-import { TableRow, TableCell, Checkbox, Avatar, Theme, CSSObject, Box } from "@mui/material"
+import { TableRow, TableCell, Checkbox, Theme, CSSObject, Box } from "@mui/material"
 import { FC } from "react";
-import { RowLogo } from "./RowLogo";
+import { Logo } from "@components/common/Logo";
+import { useNavigate } from "react-router-dom";
 
 function transformIntoRowInfo(logins : EncryptedLogin[]) : RowInfo[] {
     return logins.map((login : EncryptedLogin) => {
@@ -21,14 +22,15 @@ interface RowInfo extends EncryptedLogin {
 }
   
 interface PMTableRowProps {
-    onRowClick : (row: RowInfo) => void;
+    onCheckBoxClick : (row: RowInfo) => void;
     row : RowInfo,
     key : number,
 }
 
-const PMTableRow : FC<PMTableRowProps> = ({ onRowClick, row, key}) => {
-    const {name, emails, website, timestamp, logo, isSelected} = row;
-    
+const PMTableRow : FC<PMTableRowProps> = ({ onCheckBoxClick, row, key}) => {
+    const {id, name, emails, website, timestamp, logo, isSelected} = row;
+    const navigate = useNavigate();
+
     const styles = (theme: Theme): CSSObject => (
         {
             display: 'flex',
@@ -37,23 +39,33 @@ const PMTableRow : FC<PMTableRowProps> = ({ onRowClick, row, key}) => {
             gap: theme.spacing(2),
         }
     )
+    const onEventCheckboxClick = (event : any) => {
+        event.stopPropagation();
+        onCheckBoxClick(row);
+    }
+
+    const onRowClick = () => {
+        navigate(`/home/logins/${id}`);
+    }
 
     return (
-        <TableRow hover role="checkbox" key={key} selected={isSelected}>
+        <TableRow sx={{cursor: "pointer"}} onClick={onRowClick} hover role="checkbox" key={key} selected={isSelected}>
             <TableCell
-            sx={{   width: "1px", whiteSpace: "nowrap"}}
+            sx={{ minWidth: "1px", whiteSpace: "nowrap"}}
             padding="checkbox">
                 <Checkbox
-                    onClick={(_ : any) => onRowClick(row)}
+                    onClick={onEventCheckboxClick}
                     color="primary"
                     checked={isSelected}
                 />
             </TableCell>
             <TableCell />
             
-            <TableCell sx={styles} component="th" scope="row" padding="none">
-                <RowLogo logo={logo} name={name} />
-                <Box sx={{whiteSpace: "nowrap"}}>{name}</Box>
+            <TableCell component="th" scope="row" padding="none">
+                <Box sx={styles}>
+                    <Logo logo={logo} name={name} width="60px" height="40px" />
+                    <Box sx={{whiteSpace: "nowrap"}}>{name}</Box>
+                </Box>
             </TableCell>
             <TableCell align="left">{emails}</TableCell>
             <TableCell align="left">{website}</TableCell>

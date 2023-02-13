@@ -15,7 +15,12 @@ interface DecryptedLogin extends EncryptedLogin {
     Oauth ?: string,
 }
 
+type EncryptedLoginCreate = Omit<EncryptedLogin, 'id' | 'timestamp'>;
+type DecryptedLoginCreate = Omit<DecryptedLogin, 'id' | 'timestamp'>;
+
 export {
     type EncryptedLogin,
     type DecryptedLogin,
+    type EncryptedLoginCreate,
+    type DecryptedLoginCreate
 }
